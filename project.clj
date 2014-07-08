@@ -3,8 +3,7 @@
   :url "http://github/vyorkin"
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.1.8"]
-                 [hiccup "1.0.5"]
-                 [hiccup-bootstrap-3 "0.2.0-SNAPSHOT"]]
+                 [hiccup "1.0.5"] ]
   :plugins [[lein-ring "0.8.11"]]
   :ring {:handler todo.handlers/app}
   :profiles
