@@ -1,9 +1,8 @@
 (ns todo.views
-  (:use [hiccup core page])
+  (:use [hiccup core page form])
   (:use [hiccup.bootstrap page]))
 
 (defn default-layout
-  "Default layout to be used for todo pages"
   [title heading & content]
   (html5
     [:head
@@ -16,9 +15,19 @@
    (default-layout "index" "todo list"
      [:div {:class "row"}
       [:p {:class "lead"}
-       [:ul (for [x todos] [:li x])]]]))
+       [:ul (for [x todos] [:li (:content x)])]]]))
 
 (defn show [todo]
-  (default-layout "show" (str "todo #" {:title todo})
+  (default-layout "show" (str "todo #" (get todo :id))
     [:div {:class "row"}
-     [:p {:class "lead"} (str "todo #" {:desc todo})]]))
+     [:p {:class "lead"} (get todo :content)]]))
+
+(defn create []
+  (default-layout "create" "new task"
+    [:div {:class "row"}
+     (form-to [:post "/todo"]
+              (label "content" "Content")
+              [:br]
+              (text-area "content")
+              [:br]
+              (submit-button "create"))]))
