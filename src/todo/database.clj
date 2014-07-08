@@ -9,8 +9,7 @@
   (dosync (let [new-task (assoc todo :id (next-todo-index))]
             alter todo conj new-task)))
 
-(defn find-todo [id]
-  (first (filter #(= (get % :id) id) @todo)))
+(defn find-todo [id] (dosync (first (filter #(= (get % :id) id) @todo))))
 
 (defn complete-todo [id]
   (dosync (let [new-todo (vec (remove #(= (get % :id) id) @todo))]

@@ -11,8 +11,7 @@
             {:id "2" :content "make edit page with form"}
             {:id "3" :content "try some query builder for sql with postgres adapter"}])
 
-(defn find-todo [id]
-  (first (filter #(= (get % :id) id) todos)))
+(defn find-todo [id] (first (filter #(= (get % :id) id) todos)))
 
 (defroutes app-routes
   (context "/todo" []

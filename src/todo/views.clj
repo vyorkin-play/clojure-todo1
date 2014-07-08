@@ -25,9 +25,8 @@
 (defn create []
   (default-layout "create" "new task"
     [:div {:class "row"}
-     (form-to [:post "/todo"]
-              (label "content" "Content")
-              [:br]
-              (text-area "content")
-              [:br]
-              (submit-button "create"))]))
+     (form-to {:role "form"} [:post "/todo"]
+              [:div {:class "form-group"}
+               (label :content "Content")
+               (text-field {:class "form-control" :placeholder "task description"} :content)]
+              (submit-button {:class "btn btn-default"} "Create"))]))
