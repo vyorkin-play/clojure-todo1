@@ -1,16 +1,17 @@
 (ns todo.database)
 
-(def todo (ref []))
-(def todo-index (ref 0))
+(def todos (ref []))
+(def current-id (ref 0))
 
-(defn next-todo-index [] (dosync (alter todo inc)))
+(defn next-id []
+  (dosync (alter current-id inc)))
 
-(defn add-todo [todo]
-  (dosync (let [new-task (assoc todo :id (next-todo-index))]
-            alter todo conj new-task)))
+(defn create [attrs]
+  (dosync (alter todos conj (assoc attrs :id (next-id)))))
 
-(defn find-todo [id] (dosync (first (filter #(= (get % :id) id) @todo))))
+(defn find-by-id [id]
+  (dosync (first (filter #(= (get % :id) id) @todos))))
 
-(defn complete-todo [id]
-  (dosync (let [new-todo (vec (remove #(= (get % :id) id) @todo))]
-            ref-set todo new-todo)))
+(defn destroy [id]
+  (dosync (let [new-todos (vec (remove #(= (get % :id) id) @todos))]
+            ref-set todos new-todos)))

@@ -11,11 +11,14 @@
      (include-bootstrap)]
     [:body (fixed-layout [:div {:class "row"} [:h1 heading]] content)]))
 
-(defn index [todos]
+(defn todo-item [todo]
+  [:li (:content todo)])
+
+(defn index [coll]
    (default-layout "index" "todo list"
      [:div {:class "row"}
       [:p {:class "lead"}
-       [:ul (for [x todos] [:li (:content x)])]]]))
+       [:ul (for [todo coll] (todo-item todo))]]]))
 
 (defn show [todo]
   (default-layout "show" (str "todo #" (get todo :id))
