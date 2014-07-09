@@ -1,6 +1,5 @@
 (ns todo.views.tasks.form
-  (:use [hiccup core page form])
-  (:use [hiccup.bootstrap page]))
+  (:use [hiccup core page form]))
 
 (defn horizontal-form []
   (form-to

@@ -1,17 +1,17 @@
 (ns todo.database)
 
-(def todos (ref []))
+(def tasks (ref []))
 (def current-id (ref 0))
 
-(defn next-id []
+(defn- next-id []
   (dosync (alter current-id inc)))
 
 (defn create [attrs]
-  (dosync (alter todos conj (assoc attrs :id (next-id)))))
+  (dosync (alter tasks conj (assoc attrs :id (next-id)))))
 
 (defn find-by-id [id]
-  (dosync (first (filter #(= (get % :id) id) @todos))))
+  (dosync (first (filter #(= (get % :id) id) @tasks))))
 
 (defn destroy [id]
-  (dosync (let [new-todos (vec (remove #(= (get % :id) id) @todos))]
-            ref-set todos new-todos)))
+  (dosync (let [new-tasks (vec (remove #(= (get % :id) id) @tasks))]
+            ref-set tasks new-tasks)))

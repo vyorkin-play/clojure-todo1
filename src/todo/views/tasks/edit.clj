@@ -1,6 +1,5 @@
-(ns todo.views.tasks.index
+(ns todo.views.tasks.edit
   (:use [hiccup core page form])
-  (:use [hiccup.bootstrap page])
   (:require [todo.views.layouts.application :refer [layout]]))
 
 (defn page [task]
